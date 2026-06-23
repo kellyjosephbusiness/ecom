@@ -1,0 +1,27 @@
+// Prisma schema for NextMerce
+// Docs: https://nextmerce.com/docs/database
+//
+// NOTE: The free NextMerce template ships without a database schema, so this
+// file defines a minimal starter `User` model so that `prisma generate` and
+// `prisma db push` have something to create (the docs' verification step is
+// "sign up and confirm the user appears in your database"). Replace or extend
+// these models with your own — the Pro template includes the full schema.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String?
+  email     String   @unique
+  password  String?
+  image     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
