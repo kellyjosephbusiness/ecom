@@ -1,8 +1,63 @@
+"use client";
 import Breadcrumb from "@/components/Common/Breadcrumb";
 import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
+import { signIn } from "next-auth/react";
+import toast from "react-hot-toast";
 
 const Signup = () => {
+  const router = useRouter();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [rePassword, setRePassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (password !== rePassword) {
+      toast.error("Passwords do not match.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await fetch("/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password }),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        toast.error(data.error || "Registration failed.");
+        setLoading(false);
+        return;
+      }
+
+      toast.success("Account created! Signing you in...");
+
+      const signInRes = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
+      setLoading(false);
+
+      if (signInRes?.error) {
+        router.push("/signin");
+      } else {
+        router.push("/");
+        router.refresh();
+      }
+    } catch (err) {
+      setLoading(false);
+      toast.error("Something went wrong. Please try again.");
+    }
+  };
+
   return (
     <>
       <Breadcrumb title={"Signup"} pages={["Signup"]} />
@@ -17,7 +72,11 @@ const Signup = () => {
             </div>
 
             <div className="flex flex-col gap-4.5">
-              <button className="flex justify-center items-center gap-3.5 rounded-lg border border-gray-3 bg-gray-1 p-3 ease-out duration-200 hover:bg-gray-2">
+              <button
+                type="button"
+                onClick={() => signIn("google", { callbackUrl: "/" })}
+                className="flex justify-center items-center gap-3.5 rounded-lg border border-gray-3 bg-gray-1 p-3 ease-out duration-200 hover:bg-gray-2"
+              >
                 <svg
                   width="20"
                   height="20"
@@ -64,7 +123,11 @@ const Signup = () => {
                 Sign Up with Google
               </button>
 
-              <button className="flex justify-center items-center gap-3.5 rounded-lg border border-gray-3 bg-gray-1 p-3 ease-out duration-200 hover:bg-gray-2">
+              <button
+                type="button"
+                onClick={() => signIn("github", { callbackUrl: "/" })}
+                className="flex justify-center items-center gap-3.5 rounded-lg border border-gray-3 bg-gray-1 p-3 ease-out duration-200 hover:bg-gray-2"
+              >
                 <svg
                   width="22"
                   height="22"
@@ -87,7 +150,7 @@ const Signup = () => {
             </span>
 
             <div className="mt-5.5">
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="mb-5">
                   <label htmlFor="name" className="block mb-2.5">
                     Full Name <span className="text-red">*</span>
@@ -98,6 +161,9 @@ const Signup = () => {
                     name="name"
                     id="name"
                     placeholder="Enter your full name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
                     className="rounded-lg border border-gray-3 bg-gray-1 placeholder:text-dark-5 w-full py-3 px-5 outline-none duration-200 focus:border-transparent focus:shadow-input focus:ring-2 focus:ring-blue/20"
                   />
                 </div>
@@ -112,6 +178,9 @@ const Signup = () => {
                     name="email"
                     id="email"
                     placeholder="Enter your email address"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
                     className="rounded-lg border border-gray-3 bg-gray-1 placeholder:text-dark-5 w-full py-3 px-5 outline-none duration-200 focus:border-transparent focus:shadow-input focus:ring-2 focus:ring-blue/20"
                   />
                 </div>
@@ -127,6 +196,10 @@ const Signup = () => {
                     id="password"
                     placeholder="Enter your password"
                     autoComplete="on"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    minLength={6}
                     className="rounded-lg border border-gray-3 bg-gray-1 placeholder:text-dark-5 w-full py-3 px-5 outline-none duration-200 focus:border-transparent focus:shadow-input focus:ring-2 focus:ring-blue/20"
                   />
                 </div>
@@ -142,15 +215,19 @@ const Signup = () => {
                     id="re-type-password"
                     placeholder="Re-type your password"
                     autoComplete="on"
+                    value={rePassword}
+                    onChange={(e) => setRePassword(e.target.value)}
+                    required
                     className="rounded-lg border border-gray-3 bg-gray-1 placeholder:text-dark-5 w-full py-3 px-5 outline-none duration-200 focus:border-transparent focus:shadow-input focus:ring-2 focus:ring-blue/20"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full flex justify-center font-medium text-white bg-dark py-3 px-6 rounded-lg ease-out duration-200 hover:bg-blue mt-7.5"
+                  disabled={loading}
+                  className="w-full flex justify-center font-medium text-white bg-dark py-3 px-6 rounded-lg ease-out duration-200 hover:bg-blue mt-7.5 disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  Create Account
+                  {loading ? "Creating account..." : "Create Account"}
                 </button>
 
                 <p className="text-center mt-6">

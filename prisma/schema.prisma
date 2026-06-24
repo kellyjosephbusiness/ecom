@@ -1,11 +1,10 @@
 // Prisma schema for NextMerce
 // Docs: https://nextmerce.com/docs/database
 //
-// NOTE: The free NextMerce template ships without a database schema, so this
-// file defines a minimal starter `User` model so that `prisma generate` and
-// `prisma db push` have something to create (the docs' verification step is
-// "sign up and confirm the user appears in your database"). Replace or extend
-// these models with your own — the Pro template includes the full schema.
+// Models for NextAuth (next-auth v4) email/password + OAuth auth:
+//   User, Account, Session, VerificationToken (the canonical Auth.js schema)
+//   plus a `password` field on User for the Credentials provider.
+// Extend with your own e-commerce models (Product, Order, ...) as needed.
 
 generator client {
   provider = "prisma-client-js"
@@ -18,11 +17,49 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  name      String?
-  email     String   @unique
-  password  String?
-  image     String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  password      String? // hashed; only for Credentials sign-ups
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@unique([identifier, token])
 }
