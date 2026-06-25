@@ -63,3 +63,15 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+
+model Product {
+  id              Int      @id @default(autoincrement())
+  title           String
+  reviews         Int      @default(0)
+  price           Float
+  discountedPrice Float
+  thumbnails      String[]
+  previews        String[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}

@@ -1,5 +1,6 @@
 import React from "react";
 import ShopWithSidebar from "@/components/ShopWithSidebar";
+import { getProducts } from "@/lib/products";
 
 import { Metadata } from "next";
 export const metadata: Metadata = {
@@ -8,10 +9,13 @@ export const metadata: Metadata = {
   // other metadata
 };
 
-const ShopWithSidebarPage = () => {
+export const dynamic = "force-dynamic";
+
+const ShopWithSidebarPage = async () => {
+  const products = await getProducts();
   return (
     <main>
-      <ShopWithSidebar />
+      <ShopWithSidebar products={products} />
     </main>
   );
 };
