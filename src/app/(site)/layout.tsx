@@ -16,6 +16,10 @@ import PreviewSliderModal from "@/components/Common/PreviewSlider";
 import ScrollToTop from "@/components/Common/ScrollToTop";
 import PreLoader from "@/components/Common/PreLoader";
 
+import { SessionProvider } from "next-auth/react";
+import { Toaster } from "react-hot-toast";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+
 export default function RootLayout({
   children,
 }: {
@@ -33,7 +37,7 @@ export default function RootLayout({
         {loading ? (
           <PreLoader />
         ) : (
-          <>
+          <SessionProvider>
             <ReduxProvider>
               <CartModalProvider>
                 <ModalProvider>
@@ -50,8 +54,10 @@ export default function RootLayout({
             </ReduxProvider>
             <ScrollToTop />
             <Footer />
-          </>
+            <Toaster position="top-center" />
+          </SessionProvider>
         )}
+        <SpeedInsights />
       </body>
     </html>
   );
