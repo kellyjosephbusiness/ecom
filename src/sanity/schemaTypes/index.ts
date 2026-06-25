@@ -1,9 +1,8 @@
 import { type SchemaTypeDefinition } from "sanity";
 
-// "clean" template — no document/object types yet.
-// Add your schemas here, e.g.:
-//   import { product } from "./product";
-//   export const schema = { types: [product] };
+import { post } from "./post";
+
+// Starter schema: a blog Post. Add more document/object types here.
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [],
+  types: [post],
 };
