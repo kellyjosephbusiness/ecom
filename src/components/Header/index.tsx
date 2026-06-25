@@ -9,12 +9,14 @@ import { useSelector } from "react-redux";
 import { selectTotalPrice } from "@/redux/features/cart-slice";
 import { useCartModalContext } from "@/app/context/CartSidebarModalContext";
 import Image from "next/image";
+import { useSession, signOut } from "next-auth/react";
 
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [navigationOpen, setNavigationOpen] = useState(false);
   const [stickyMenu, setStickyMenu] = useState(false);
   const { openCartModal } = useCartModalContext();
+  const { data: session } = useSession();
 
   const product = useAppSelector((state) => state.cartReducer.items);
   const totalPrice = useSelector(selectTotalPrice);
@@ -158,7 +160,10 @@ const Header = () => {
 
             <div className="flex w-full lg:w-auto justify-between items-center gap-5">
               <div className="flex items-center gap-5">
-                <Link href="/signin" className="flex items-center gap-2.5">
+                <Link
+                  href={session?.user ? "/my-account" : "/signin"}
+                  className="flex items-center gap-2.5"
+                >
                   <svg
                     width="24"
                     height="24"
@@ -185,10 +190,21 @@ const Header = () => {
                       account
                     </span>
                     <p className="font-medium text-custom-sm text-dark">
-                      Sign In
+                      {session?.user
+                        ? session.user.name || "My Account"
+                        : "Sign In"}
                     </p>
                   </div>
                 </Link>
+
+                {session?.user && (
+                  <button
+                    onClick={() => signOut({ callbackUrl: "/" })}
+                    className="font-medium text-custom-sm text-dark hover:text-blue ease-out duration-200"
+                  >
+                    Sign Out
+                  </button>
+                )}
 
                 <button
                   onClick={handleOpenCartModal}
