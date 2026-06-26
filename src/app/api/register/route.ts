@@ -37,6 +37,14 @@ export async function POST(req: Request) {
       { status: 201 }
     );
   } catch (err) {
+    // Unique-constraint violation — handles the race where two concurrent
+    // signups with the same email both pass the pre-check above.
+    if (err && typeof err === "object" && (err as { code?: string }).code === "P2002") {
+      return NextResponse.json(
+        { error: "An account with this email already exists." },
+        { status: 409 }
+      );
+    }
     console.error("register error", err);
     return NextResponse.json(
       { error: "Something went wrong. Please try again." },

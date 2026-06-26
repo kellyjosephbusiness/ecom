@@ -37,6 +37,9 @@ if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      // Google verifies email ownership, so linking an OAuth sign-in to an
+      // existing same-email account is safe and avoids OAuthAccountNotLinked.
+      allowDangerousEmailAccountLinking: true,
     })
   );
 }
@@ -46,6 +49,8 @@ if (process.env.GITHUB_ID && process.env.GITHUB_SECRET) {
     GitHubProvider({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
+      // GitHub verifies email ownership, so linking by email is safe here.
+      allowDangerousEmailAccountLinking: true,
     })
   );
 }
