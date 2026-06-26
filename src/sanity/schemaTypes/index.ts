@@ -1,8 +1,10 @@
 import { type SchemaTypeDefinition } from "sanity";
 
+import { listing } from "./listing";
+import { category } from "./category";
 import { post } from "./post";
 
-// Starter schema: a blog Post. Add more document/object types here.
+// Directory content models (listing + category) plus an optional blog post.
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [post],
+  types: [listing, category, post],
 };
