@@ -1,10 +1,31 @@
 import { type SchemaTypeDefinition } from "sanity";
 
-import { listing } from "./listing";
-import { category } from "./category";
-import { post } from "./post";
+// Documents
+import { facility } from "./facility";
+import { city } from "./city";
+import { state } from "./state";
+import { careType } from "./careType";
+import { condition } from "./condition";
+import { insurance } from "./insurance";
+import { article } from "./article";
 
-// Directory content models (listing + category) plus an optional blog post.
+// Objects (reusable, embedded)
+import { rating } from "./rating";
+import { faq } from "./faq";
+import { address } from "./address";
+
+// Senior-living directory content models.
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [listing, category, post],
+  types: [
+    facility,
+    city,
+    state,
+    careType,
+    condition,
+    insurance,
+    article,
+    rating,
+    faq,
+    address,
+  ],
 };

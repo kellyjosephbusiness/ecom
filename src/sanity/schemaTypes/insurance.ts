@@ -1,10 +1,9 @@
 import { type SchemaTypeDefinition } from "sanity";
 
-// Directory category. Declared as a plain object + cast (sanity@5 defineField
-// needs TS >= 5.4; this project is on 5.2).
-export const category = {
-  name: "category",
-  title: "Category",
+// Taxonomy for "browse by insurance" (e.g. Medicare, Medicaid, VA).
+export const insurance = {
+  name: "insurance",
+  title: "Insurance",
   type: "document",
   fields: [
     {
@@ -20,11 +19,7 @@ export const category = {
       options: { source: "title", maxLength: 96 },
       validation: (rule) => rule.required(),
     },
-    {
-      name: "description",
-      title: "Description",
-      type: "text",
-    },
+    { name: "description", title: "Description", type: "text" },
   ],
   preview: { select: { title: "title" } },
 } as unknown as SchemaTypeDefinition;
