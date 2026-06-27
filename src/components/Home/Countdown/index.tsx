@@ -8,7 +8,7 @@ const CounDown = () => {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
 
-  const deadline = "December, 31, 2024";
+  const deadline = "December, 31, 2026";
 
   const getTime = () => {
     const time = Date.parse(deadline) - Date.now();
@@ -32,14 +32,14 @@ const CounDown = () => {
         <div className="relative overflow-hidden z-1 rounded-lg bg-[#D0E9F3] p-4 sm:p-7.5 lg:p-10 xl:p-15">
           <div className="max-w-[422px] w-full">
             <span className="block font-medium text-custom-1 text-blue mb-2.5">
-              Don’t Miss!!
+              You&apos;re Invited!
             </span>
 
             <h2 className="font-bold text-dark text-xl lg:text-heading-4 xl:text-heading-3 mb-3">
-              Enhance Your Music Experience
+              Join Our Community Open House
             </h2>
 
-            <p>The Havit H206d is a wired PC headphone.</p>
+            <p>Tour our residences, meet the team, and enjoy lunch on us.</p>
 
             {/* <!-- Countdown timer --> */}
             <div
@@ -104,10 +104,10 @@ const CounDown = () => {
             {/* <!-- Countdown timer ends --> */}
 
             <a
-              href="#"
+              href="/contact"
               className="inline-flex font-medium text-custom-sm text-white bg-blue py-3 px-9.5 rounded-md ease-out duration-200 hover:bg-blue-dark mt-7.5"
             >
-              Check it Out!
+              Reserve Your Spot
             </a>
           </div>
 

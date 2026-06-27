@@ -2,6 +2,7 @@ import React from "react";
 import HeroCarousel from "./HeroCarousel";
 import HeroFeature from "./HeroFeature";
 import Image from "next/image";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -28,20 +29,17 @@ const Hero = () => {
               <div className="w-full relative rounded-[10px] bg-white p-4 sm:p-7.5">
                 <div className="flex items-center gap-14">
                   <div>
-                    <h2 className="max-w-[153px] font-semibold text-dark text-xl mb-20">
-                      <a href="#"> iPhone 14 Plus & 14 Pro Max </a>
+                    <h2 className="max-w-[153px] font-semibold text-dark text-xl mb-12">
+                      <Link href="/contact"> Schedule a Personal Tour </Link>
                     </h2>
 
                     <div>
                       <p className="font-medium text-dark-4 text-custom-sm mb-1.5">
-                        limited time offer
+                        Visit our community
                       </p>
                       <span className="flex items-center gap-3">
-                        <span className="font-medium text-heading-5 text-red">
-                          $699
-                        </span>
-                        <span className="font-medium text-2xl text-dark-4 line-through">
-                          $999
+                        <span className="font-medium text-custom-1 text-blue">
+                          Book today
                         </span>
                       </span>
                     </div>
@@ -50,7 +48,7 @@ const Hero = () => {
                   <div>
                     <Image
                       src="/images/hero/hero-02.png"
-                      alt="mobile image"
+                      alt="Resident enjoying the community"
                       width={123}
                       height={161}
                     />
@@ -60,20 +58,17 @@ const Hero = () => {
               <div className="w-full relative rounded-[10px] bg-white p-4 sm:p-7.5">
                 <div className="flex items-center gap-14">
                   <div>
-                    <h2 className="max-w-[153px] font-semibold text-dark text-xl mb-20">
-                      <a href="#"> Wireless Headphone </a>
+                    <h2 className="max-w-[153px] font-semibold text-dark text-xl mb-12">
+                      <Link href="/community"> Levels of Care &amp; Amenities </Link>
                     </h2>
 
                     <div>
                       <p className="font-medium text-dark-4 text-custom-sm mb-1.5">
-                        limited time offer
+                        Find your fit
                       </p>
                       <span className="flex items-center gap-3">
-                        <span className="font-medium text-heading-5 text-red">
-                          $699
-                        </span>
-                        <span className="font-medium text-2xl text-dark-4 line-through">
-                          $999
+                        <span className="font-medium text-custom-1 text-blue">
+                          Explore now
                         </span>
                       </span>
                     </div>
@@ -82,7 +77,7 @@ const Hero = () => {
                   <div>
                     <Image
                       src="/images/hero/hero-01.png"
-                      alt="mobile image"
+                      alt="Community amenities"
                       width={123}
                       height={161}
                     />
@@ -90,7 +85,7 @@ const Hero = () => {
                 </div>
               </div>
 
-              
+
             </div>
           </div>
         </div>
