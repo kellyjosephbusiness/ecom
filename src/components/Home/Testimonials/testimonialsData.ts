@@ -2,46 +2,47 @@ import { Testimonial } from "@/types/testimonial";
 
 const testimonialsData: Testimonial[] = [
   {
-    review: `Lorem ipsum dolor sit amet, adipiscing elit. Donec
-    malesuada justo vitaeaugue suscipit beautiful vehicula`,
-    authorName: "Davis Dorwart",
+    review: `Moving Mom here was the best decision our family made. The care team
+    treats her like their own, and she's more active and social than she's been
+    in years.`,
+    authorName: "Sandra Mitchell",
     authorImg: "/images/users/user-01.jpg",
-    authorRole: "Serial Entrepreneur",
+    authorRole: "Daughter of a Resident",
   },
   {
-    review: `Lorem ipsum dolor sit amet, adipiscing elit. Donec
-    malesuada justo vitaeaugue suscipit beautiful vehicula`,
-    authorName: "Wilson Dias",
+    review: `I was nervous about leaving my home, but this community feels like
+    home — wonderful neighbors, delicious meals, and so much to do every day.`,
+    authorName: "Robert Hayes",
     authorImg: "/images/users/user-02.jpg",
-    authorRole: "Backend Developer",
+    authorRole: "Independent Living Resident",
   },
   {
-    review: `Lorem ipsum dolor sit amet, adipiscing elit. Donec
-    malesuada justo vitaeaugue suscipit beautiful vehicula`,
-    authorName: "Miracle Exterm",
+    review: `The memory care neighborhood gave us peace of mind. The staff are
+    patient, kind, and genuinely understand how to care for my father.`,
+    authorName: "Elena Brooks",
     authorImg: "/images/users/user-03.jpg",
-    authorRole: "Serial Entrepreneur",
+    authorRole: "Son's Family",
   },
   {
-    review: `Lorem ipsum dolor sit amet, adipiscing elit. Donec
-    malesuada justo vitaeaugue suscipit beautiful vehicula`,
-    authorName: "Thomas Frank",
+    review: `From the dining to the wellness classes, everything is first-class.
+    I've made more friends here in six months than I expected to in years.`,
+    authorName: "Margaret Doyle",
     authorImg: "/images/users/user-01.jpg",
-    authorRole: "Entrepreneur",
+    authorRole: "Assisted Living Resident",
   },
   {
-    review: `Lorem ipsum dolor sit amet, adipiscing elit. Donec
-    malesuada justo vitaeaugue suscipit beautiful vehicula`,
-    authorName: "Dave Smith",
+    review: `After my surgery, the respite stay was a lifesaver. The rehab team
+    had me back on my feet, and the staff couldn't have been more attentive.`,
+    authorName: "James Whitfield",
     authorImg: "/images/users/user-02.jpg",
-    authorRole: "Serial Entrepreneur",
+    authorRole: "Respite Care Guest",
   },
   {
-    review: `Lorem ipsum dolor sit amet, adipiscing elit. Donec
-    malesuada justo vitaeaugue suscipit beautiful vehicula`,
-    authorName: "Davis Dorwart",
+    review: `Knowing Dad has 24/7 care and a community that truly cares lets the
+    whole family rest easy. We're grateful every single day.`,
+    authorName: "Patricia Nguyen",
     authorImg: "/images/users/user-03.jpg",
-    authorRole: "Serial Entrepreneur",
+    authorRole: "Daughter of a Resident",
   },
 ];
 
